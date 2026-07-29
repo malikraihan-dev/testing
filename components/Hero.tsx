@@ -5,52 +5,78 @@ export default function Hero() {
   return (
     <section className="min-h-screen flex flex-col justify-center px-8 md:px-24 pt-24 relative overflow-hidden">
 
-      {/* Background gradient blob */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-700 opacity-10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-blue-600 opacity-10 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-white opacity-[0.03] rounded-full blur-[140px] -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-white opacity-[0.03] rounded-full blur-[120px] translate-x-1/3 translate-y-1/3" />
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-gray-400 text-sm tracking-widest uppercase mb-3"
-      >
-        Halo, saya
-      </motion.p>
+      <div className="relative z-10 max-w-4xl">
 
-      <motion.h1
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
-      >
-        Malik
-      </motion.h1>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 border border-white/10 rounded-full px-4 py-1.5 mb-8"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          <span className="text-gray-400 text-xs tracking-widest uppercase">
+            Open to opportunities
+          </span>
+        </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-xl text-gray-300 max-w-lg mb-8"
-      >
-        Computer Engineering Student · ML Enthusiast · Project Manager
-      </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-7xl md:text-9xl font-bold tracking-tight mb-6 text-white leading-none"
+        >
+          Malik
+        </motion.h1>
+
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="origin-left h-px w-24 bg-white/20 mb-6"
+        />
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-gray-400 text-lg max-w-xl mb-10 leading-relaxed"
+        >
+          Mahasiswa Teknologi Rekayasa Komputer · ML Enthusiast · Project Manager di IPB University
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-wrap items-center gap-4"
+        >
+          <a href="#projects" className="bg-white text-black px-7 py-3 rounded-full text-sm font-semibold hover:bg-gray-100 hover:scale-105 transition-all duration-200">
+            Lihat Project
+          </a>
+          <a href="#contact" className="text-gray-400 text-sm px-7 py-3 rounded-full border border-white/10 hover:border-white/30 hover:text-white transition-all duration-200">
+            Hubungi Saya
+          </a>
+        </motion.div>
+
+      </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="flex gap-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="absolute bottom-10 left-8 md:left-24 flex flex-col items-center gap-2"
       >
-        <a href="#projects"
-           className="bg-white text-black px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform duration-200">
-          Lihat Project
-        </a>
-        <a href="#contact"
-           className="border border-white/30 px-6 py-3 rounded-full hover:bg-white/10 hover:scale-105 transition-all duration-200">
-          Hubungi Saya
-        </a>
+        <span className="text-gray-600 text-xs tracking-widest uppercase">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="w-px h-8 bg-gradient-to-b from-white/20 to-transparent"
+        />
       </motion.div>
+
     </section>
   );
 }
