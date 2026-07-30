@@ -2,62 +2,112 @@
 import { motion } from "framer-motion";
 
 const contacts = [
-  { label: "Email", value: "malik@email.com", href: "mailto:malik@email.com" },
-  { label: "GitHub", value: "github.com/malik", href: "https://github.com/malik" },
-  { label: "LinkedIn", value: "linkedin.com/in/malik", href: "https://linkedin.com/in/malik" },
+  { num: "01", label: "Email", value: "malik@email.com", href: "mailto:malik@email.com" },
+  { num: "02", label: "GitHub", value: "@malik_dev", href: "https://github.com/malik" },
+  { num: "03", label: "LinkedIn", value: "malik-engineering", href: "https://linkedin.com/in/malik" },
 ];
 
 export default function Contact() {
   return (
-    <section id="contact" className="px-8 md:px-24 py-32 border-t border-white/5">
-      <div className="max-w-4xl">
+    <section id="contact" style={{ borderTop: "1px solid #1a1a1a" }}>
+
+      {/* Header */}
+      <div style={{ padding: "64px 48px 48px 48px" }}>
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-gray-600 text-xs tracking-widest uppercase mb-4"
+          style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em", color: "#555", textTransform: "uppercase", marginBottom: "12px" }}
         >
-          03 — Contact
+          04 / Contact
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-4xl font-bold mb-4 text-white"
+          style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, color: "#e8e8e8", letterSpacing: "-0.01em" }}
         >
           Mari Berkolaborasi
         </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-gray-500 mb-12 max-w-md leading-relaxed"
-        >
-          Terbuka untuk project, kolaborasi, atau sekadar ngobrol soal tech dan ML.
-        </motion.p>
+      </div>
+
+      {/* Contact links */}
+      <div style={{ borderTop: "1px solid #1a1a1a" }}>
+        {contacts.map((c, i) => (
+          <motion.a
+            key={c.num}
+            href={c.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.08 }}
+            style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              padding: "22px 48px", borderBottom: "1px solid #1a1a1a",
+              textDecoration: "none", transition: "background 0.2s"
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#111"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#444" }}>{c.num}</span>
+              <span style={{ fontSize: "18px", fontWeight: 600, color: "#e8e8e8" }}>{c.label}</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#555" }}>{c.value}</span>
+              <span style={{ color: "#555", fontSize: "14px" }}>↗</span>
+            </div>
+          </motion.a>
+        ))}
+      </div>
+
+      {/* Info bawah */}
+      <div style={{ display: "flex", gap: "64px", padding: "40px 48px", flexWrap: "wrap" }}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col gap-0"
         >
-          {contacts.map((item) => (
-            <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between border-t border-white/5 py-5 hover:border-white/20 transition-colors duration-300">
-              <div className="flex items-center gap-6">
-                <span className="text-gray-600 text-xs w-16">{item.label}</span>
-                <span className="text-white text-sm group-hover:text-gray-300 transition-colors">{item.value}</span>
-              </div>
-              <span className="text-gray-700 group-hover:text-white transition-all duration-300">
-                {String.fromCharCode(8594)}
-              </span>
-            </a>
-          ))}
-          <div className="border-t border-white/5" />
+          <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", color: "#555", textTransform: "uppercase", marginBottom: "10px" }}>
+            Availability
+          </p>
+          <p style={{ fontSize: "12px", color: "#888", lineHeight: 1.7, maxWidth: "220px" }}>
+            Terbuka untuk project kolaborasi, internship, dan freelance work di bidang ML dan engineering.
+          </p>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
+          <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", color: "#555", textTransform: "uppercase", marginBottom: "10px" }}>
+            Location
+          </p>
+          <p style={{ fontSize: "12px", color: "#888", lineHeight: 1.7 }}>
+            Bogor, Indonesia<br />— Remote Worldwide
+          </p>
         </motion.div>
       </div>
+
+      {/* Image grid dekoratif */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", margin: "0 48px 64px 48px", borderTop: "1px solid #1a1a1a", paddingTop: "1px" }}>
+        {[1, 2].map((n) => (
+          <div key={n} style={{
+            height: "180px", background: "#111",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            border: "1px solid #1a1a1a"
+          }}>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#2a2a2a", letterSpacing: "0.2em" }}>
+              IMAGE.{n.toString().padStart(2, "0")}
+            </span>
+          </div>
+        ))}
+      </div>
+
     </section>
   );
 }

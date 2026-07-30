@@ -1,64 +1,66 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-const navLinks = [
+const links = [
+  { label: "Work", href: "#projects" },
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("Work");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = ["about", "projects", "contact"];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { threshold: 0.5 }
+    const ids = ["projects", "about", "contact"];
+    const labels: Record<string, string> = { projects: "Work", about: "About", contact: "Contact" };
+    const obs = new IntersectionObserver(
+      (entries) => { entries.forEach((e) => { if (e.isIntersecting) setActive(labels[e.target.id]); }); },
+      { threshold: 0.4 }
     );
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
+    ids.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+    return () => obs.disconnect();
   }, []);
-
-  const navClass = scrolled
-    ? "bg-black/80 backdrop-blur-md border-b border-white/10"
-    : "bg-transparent";
 
   return (
-    <nav className={"fixed top-0 left-0 right-0 z-50 transition-all duration-300 " + navClass}>
-      <div className="max-w-6xl mx-auto px-8 md:px-24 py-4 flex justify-between items-center">
-        <a href="#" className="text-white font-bold text-lg tracking-tight hover:text-gray-300 transition">
-          Malik.
-        </a>
-        <div className="flex gap-8">
-          {navLinks.map((link) => {
-            const isActive = active === link.href.replace("#", "");
-            const linkClass = isActive
-              ? "text-sm text-white font-medium transition-all duration-200"
-              : "text-sm text-gray-400 hover:text-white transition-all duration-200";
-            return (
-              <a key={link.label} href={link.href} className={linkClass}>
-                {link.label}
-              </a>
-            );
-          })}
-        </div>
+    <nav style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+      display: "flex", alignItems: "center", justifyContent: "space-between",
+      padding: "18px 32px", background: "rgba(12,12,12,0.92)",
+      backdropFilter: "blur(8px)", borderBottom: "1px solid #1a1a1a"
+    }}>
+      {/* Hamburger (kiri) */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        style={{ background: "none", border: "none", cursor: "pointer", padding: "4px", display: "flex", flexDirection: "column", gap: "4px" }}
+      >
+        <span style={{ display: "block", width: "18px", height: "1px", background: "#e8e8e8" }} />
+        <span style={{ display: "block", width: "18px", height: "1px", background: "#e8e8e8" }} />
+      </button>
+
+      {/* Logo tengah */}
+      <a href="#" style={{
+        fontFamily: "var(--font-mono)", fontSize: "13px", letterSpacing: "0.25em",
+        color: "#e8e8e8", textDecoration: "none", textTransform: "uppercase",
+        position: "absolute", left: "50%", transform: "translateX(-50%)"
+      }}>
+        MALIK
+      </a>
+
+      {/* Nav links kanan */}
+      <div style={{ display: "flex", gap: "28px" }}>
+        {links.map((l) => (
+          <a key={l.label} href={l.href} style={{
+            fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.1em",
+            textDecoration: "none", textTransform: "capitalize",
+            color: active === l.label ? "#e8e8e8" : "#555",
+            transition: "color 0.2s",
+            borderBottom: active === l.label ? "1px solid #e8e8e8" : "1px solid transparent",
+            paddingBottom: "1px"
+          }}>
+            {l.label}
+          </a>
+        ))}
       </div>
     </nav>
   );

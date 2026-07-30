@@ -1,94 +1,109 @@
 "use client";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const projects = [
   {
-    number: "01",
+    num: "01",
     title: "Sentiment Analysis",
-    desc: "Analisis sentimen review aplikasi Indonesia menggunakan deep learning LSTM Bi-directional.",
-    tech: ["Python", "TensorFlow", "Streamlit"],
+    desc: "Analisis sentimen review aplikasi Indonesia menggunakan LSTM Bi-directional. Akurasi model 91% pada dataset Gojek & Shopee.",
+    tech: "Python // TensorFlow // Streamlit",
+    href: "",
   },
   {
-    number: "02",
-    title: "n8n Automation",
-    desc: "Workflow otomasi lead form dengan webhook, Google Sheets, Slack notifikasi, dan SMS.",
-    tech: ["n8n", "Railway", "Twilio"],
+    num: "02",
+    title: "n8n Lead Automation",
+    desc: "Workflow otomasi lead form berbasis webhook — integrasi Google Sheets, notifikasi Slack, dan SMS via Twilio. Self-hosted di Railway.",
+    tech: "n8n // Railway // Twilio",
+    href: "",
   },
   {
-    number: "03",
-    title: "HTL Reactor AI",
-    desc: "Sistem kontrol reaktor Hydrothermal Liquefaction menggunakan sensor NIR dan AI.",
-    tech: ["Python", "Arduino", "NIR Sensor"],
+    num: "03",
+    title: "HTL Reactor AI Control",
+    desc: "Sistem kontrol reaktor Hydrothermal Liquefaction menggunakan sensor NIR dan model AI untuk monitoring parameter secara real-time.",
+    tech: "Python // Arduino // NIR Sensor",
+    href: "",
   },
 ];
 
 export default function Projects() {
-  return (
-    <section id="projects" className="px-8 md:px-24 py-32 border-t border-white/5">
-      <div className="max-w-4xl">
+  const [hovered, setHovered] = useState<string | null>(null);
 
+  return (
+    <section id="projects" style={{ borderTop: "1px solid #1a1a1a", paddingBottom: "80px" }}>
+
+      {/* Header */}
+      <div style={{ padding: "64px 48px 48px 48px", display: "flex", alignItems: "flex-end", gap: "20px" }}>
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-gray-600 text-xs tracking-widest uppercase mb-4"
+          style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em", color: "#555", textTransform: "uppercase", paddingBottom: "4px" }}
         >
-          02 — Projects
+          Section // 02
         </motion.p>
-
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-4xl font-bold mb-16 text-white"
+          style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, letterSpacing: "-0.02em", color: "#e8e8e8", textTransform: "uppercase" }}
         >
           Project Pilihan
         </motion.h2>
-
-        <div className="flex flex-col gap-0">
-          {projects.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group flex flex-col md:flex-row md:items-start gap-6 py-10 border-t border-white/5 hover:border-white/20 transition-colors duration-300 cursor-default"
-            >
-              {/* Nomor */}
-              <span className="text-gray-700 text-sm font-mono group-hover:text-gray-500 transition-colors duration-300 md:pt-1 md:w-12 flex-shrink-0">
-                {p.number}
-              </span>
-
-              {/* Konten */}
-              <div className="flex-1">
-                <h3 className="text-white text-xl font-semibold mb-3 group-hover:text-gray-200 transition-colors">
-                  {p.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4 max-w-lg">
-                  {p.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {p.tech.map((t) => (
-                    <span key={t} className="text-gray-600 text-xs font-mono">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Arrow */}
-              <span className="text-gray-700 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 text-lg md:pt-1">
-                →
-              </span>
-            </motion.div>
-          ))}
-          {/* Border bawah project terakhir */}
-          <div className="border-t border-white/5" />
-        </div>
-
       </div>
+
+      {/* List */}
+      <div style={{ borderTop: "1px solid #1a1a1a" }}>
+        {projects.map((p, i) => (
+          <motion.div
+            key={p.num}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.08 }}
+            onMouseEnter={() => setHovered(p.num)}
+            onMouseLeave={() => setHovered(null)}
+            style={{
+              display: "grid", gridTemplateColumns: "56px 1fr auto auto",
+              gap: "0 32px", alignItems: "center",
+              padding: "28px 48px", borderBottom: "1px solid #1a1a1a",
+              background: hovered === p.num ? "#111" : "transparent",
+              transition: "background 0.25s", cursor: "default"
+            }}
+          >
+            {/* Nomor */}
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#444" }}>{p.num}</span>
+
+            {/* Judul + desc */}
+            <div>
+              <p style={{ fontSize: "17px", fontWeight: 600, color: "#e8e8e8", marginBottom: hovered === p.num ? "8px" : "0", transition: "margin 0.25s" }}>
+                {p.title}
+              </p>
+              <div style={{ overflow: "hidden", maxHeight: hovered === p.num ? "80px" : "0", opacity: hovered === p.num ? 1 : 0, transition: "all 0.3s" }}>
+                <p style={{ fontSize: "12px", color: "#555", lineHeight: 1.6, maxWidth: "480px", paddingTop: "4px" }}>{p.desc}</p>
+              </div>
+            </div>
+
+            {/* Tech */}
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.1em", textAlign: "right", whiteSpace: "nowrap" }}>
+              {p.tech}
+            </span>
+
+            {/* Arrow */}
+            <span style={{
+              fontFamily: "var(--font-mono)", fontSize: "16px",
+              color: hovered === p.num ? "#e8e8e8" : "#2a2a2a",
+              transition: "color 0.2s, transform 0.2s",
+              transform: hovered === p.num ? "translate(2px, -2px)" : "translate(0,0)",
+              display: "inline-block"
+            }}>
+              →
+            </span>
+          </motion.div>
+        ))}
+      </div>
+
     </section>
   );
 }
