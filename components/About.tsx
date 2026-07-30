@@ -1,123 +1,75 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 
-const skills = [
-  { num: "01", label: "Machine Learning & Deep Learning" },
-  { num: "02", label: "Workflow Automation & Integration" },
-  { num: "03", label: "IoT & Hardware Engineering" },
-  { num: "04", label: "Web Development (Next.js)" },
-  { num: "05", label: "Project Management" },
+const expertise = [
+  { num: "01", label: "System Architecture", level: "Expert" },
+  { num: "02", label: "Data Preprocessing", level: "Advanced" },
+  { num: "03", label: "Cloud Orchestration", level: "Fluent" },
+  { num: "04", label: "Hardware Logic", level: "Expert" },
 ];
 
 export default function About() {
   return (
-    <section id="about" style={{ borderTop: "1px solid #1a1a1a" }}>
-
-      {/* Header */}
-      <div style={{ padding: "64px 48px 0 48px", display: "flex", alignItems: "center", gap: "16px" }}>
-        <span style={{ fontFamily: "var(--font-mono)", fontSize: "48px", fontWeight: 700, color: "#1a1a1a" }}>01</span>
-        <motion.h2
-          initial={{ opacity: 0, x: -12 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          style={{ fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 700, color: "#e8e8e8", textTransform: "uppercase", letterSpacing: "0.05em" }}
-        >
-          Tentang Saya
-        </motion.h2>
-      </div>
-
-      {/* Body — dua kolom */}
-      <div style={{ display: "flex", gap: "0", padding: "40px 48px 0 48px", flexWrap: "wrap" }}>
-
-        {/* Kiri — foto placeholder + info */}
-        <div style={{ width: "200px", flexShrink: 0, marginRight: "48px", marginBottom: "32px" }}>
-          {/* Foto placeholder */}
-          <div style={{
-            width: "180px", height: "220px", background: "#161616",
-            border: "1px solid #1a1a1a", marginBottom: "12px",
-            display: "flex", alignItems: "center", justifyContent: "center"
-          }}>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#333", textTransform: "uppercase", letterSpacing: "0.2em" }}>Foto.jpg</span>
-          </div>
-          <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.1em" }}>
-            Based in Bogor, Indonesia · 2025 · IPB Univ.
-          </p>
+    <section id="about" className="border-b border-zinc-900 bg-[#0c0c0c] px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+      <div className="mx-auto flex max-w-6xl flex-col gap-12">
+        <div className="flex items-center gap-3">
+          <span className="font-['JetBrains_Mono'] text-[11px] uppercase tracking-[0.3em] text-stone-300">
+            01 //
+          </span>
+          <h2 className="font-['Liberation_Sans'] text-2xl font-semibold uppercase tracking-[2.4px] text-white">
+            Tentang Saya
+          </h2>
         </div>
 
-        {/* Kanan — teks */}
-        <div style={{ flex: 1, minWidth: "260px" }}>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            style={{ fontSize: "13px", color: "#888", lineHeight: 1.8, marginBottom: "16px", maxWidth: "520px" }}
-          >
-            Mahasiswa Teknologi Rekayasa Komputer di Sekolah Vokasi IPB University.
-            Saya percaya bahwa teknologi yang baik adalah teknologi yang bekerja dengan presisi —
-            bukan sekadar berfungsi, melainkan memberikan dampak yang terukur.
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            style={{ fontSize: "13px", color: "#888", lineHeight: 1.8, marginBottom: "16px", maxWidth: "520px" }}
-          >
-            Aktif di HIMAVO Micro IT dan berpengalaman sebagai Project Manager di berbagai
-            project kelompok. Fokus pada machine learning, otomasi sistem, dan pengembangan
-            solusi IoT yang fungsional.
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            style={{ fontSize: "13px", color: "#888", lineHeight: 1.8, maxWidth: "520px" }}
-          >
-            Dengan pendekatan yang disiplin terhadap data dan sistem, saya terus mendorong
-            diri untuk membangun solusi yang tidak hanya bekerja — tetapi bekerja dengan baik.
-          </motion.p>
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="relative min-h-[320px] overflow-hidden rounded-[24px] border border-zinc-900 bg-gradient-to-br from-white/20 via-stone-200/10 to-transparent">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(77,224,130,0.25),_transparent_45%)]" />
+            <div className="absolute bottom-4 left-4 rounded-full border border-zinc-800 bg-zinc-950/80 px-3 py-1 backdrop-blur-sm">
+              <div className="font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.24em] text-[#4de082]">
+                ID_001_MLK
+              </div>
+            </div>
+          </div>
 
-          {/* Kompetensi */}
-          <div style={{ marginTop: "40px", borderTop: "1px solid #1a1a1a", paddingTop: "24px" }}>
-            <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", color: "#444", textTransform: "uppercase", marginBottom: "16px" }}>
-              Kompetensi Teknis
-            </p>
-            {skills.map((s, i) => (
-              <motion.div
-                key={s.num}
-                initial={{ opacity: 0, x: -8 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                style={{ display: "flex", alignItems: "center", gap: "24px", padding: "10px 0", borderBottom: "1px solid #161616" }}
-              >
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#333" }}>{s.num}</span>
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#888", letterSpacing: "0.08em", textTransform: "uppercase" }}>{s.label}</span>
-              </motion.div>
-            ))}
+          <div className="flex flex-col gap-8">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="max-w-2xl text-base leading-7 text-stone-300"
+            >
+              Saya adalah engineer yang tertarik pada persilangan antara hardware, machine learning, dan automasi. Saya suka membangun sistem yang berfungsi secara nyata, efisien, dan siap dikembangkan.
+            </motion.p>
+
+            <div className="flex flex-col gap-4 rounded-2xl border border-zinc-900 bg-[#101010] p-5">
+              {expertise.map((item) => (
+                <div key={item.num} className="flex items-center justify-between gap-4">
+                  <div className="font-['JetBrains_Mono'] text-sm leading-6 text-stone-300">
+                    {item.num} {item.label}
+                  </div>
+                  <div className="h-px flex-1 bg-zinc-900" />
+                  <div className="font-['JetBrains_Mono'] text-sm leading-6 text-[#4de082]">
+                    {item.level}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl border border-zinc-900 bg-stone-950/70 p-6"
+            >
+              <p className="text-base leading-7 text-white">
+                Engineering is not just about solving problems; it&apos;s about defining the constraints and optimizing for the future.
+              </p>
+            </motion.div>
           </div>
         </div>
       </div>
-
-      {/* Quote block */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        style={{ margin: "48px 48px 64px 48px", borderTop: "1px solid #1a1a1a", paddingTop: "32px", paddingLeft: "24px", borderLeft: "2px solid #2a2a2a" }}
-      >
-        <p style={{ fontSize: "13px", color: "#555", fontStyle: "italic", lineHeight: 1.8, maxWidth: "480px", marginBottom: "12px" }}>
-          "Teknologi terbaik adalah yang tidak terlihat — ia hanya bekerja, dengan presisi yang konsisten, setiap saat."
-        </p>
-        <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-          — Malik, Statement of Intent
-        </p>
-      </motion.div>
-
     </section>
   );
 }

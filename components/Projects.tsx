@@ -1,109 +1,73 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
-import { useState } from "react";
 
 const projects = [
   {
-    num: "01",
-    title: "Sentiment Analysis",
-    desc: "Analisis sentimen review aplikasi Indonesia menggunakan LSTM Bi-directional. Akurasi model 91% pada dataset Gojek & Shopee.",
-    tech: "Python // TensorFlow // Streamlit",
-    href: "",
+    num: "[01]",
+    title: "SENTIMENT ANALYSIS",
+    tag: "NATURAL LANGUAGE PROCESSING",
+    tech: ["Python", "BERT", "PyTorch"],
   },
   {
-    num: "02",
-    title: "n8n Lead Automation",
-    desc: "Workflow otomasi lead form berbasis webhook — integrasi Google Sheets, notifikasi Slack, dan SMS via Twilio. Self-hosted di Railway.",
-    tech: "n8n // Railway // Twilio",
-    href: "",
+    num: "[02]",
+    title: "N8N AUTOMATION",
+    tag: "WORKFLOW ORCHESTRATION",
+    tech: ["NodeJS", "API Integration", "Self-Hosted"],
   },
   {
-    num: "03",
-    title: "HTL Reactor AI Control",
-    desc: "Sistem kontrol reaktor Hydrothermal Liquefaction menggunakan sensor NIR dan model AI untuk monitoring parameter secara real-time.",
-    tech: "Python // Arduino // NIR Sensor",
-    href: "",
+    num: "[03]",
+    title: "HTL REACTOR",
+    tag: "EMBEDDED CONTROL SYSTEMS",
+    tech: ["Arduino", "Sensors", "Real-time Control"],
   },
 ];
 
 export default function Projects() {
-  const [hovered, setHovered] = useState<string | null>(null);
-
   return (
-    <section id="projects" style={{ borderTop: "1px solid #1a1a1a", paddingBottom: "80px" }}>
+    <section id="projects" className="border-b border-zinc-900 bg-[#0c0c0c] px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+      <div className="mx-auto flex max-w-6xl flex-col gap-10">
+        <div className="flex items-center gap-3">
+          <span className="font-['JetBrains_Mono'] text-[11px] uppercase tracking-[0.3em] text-stone-300">
+            02 //
+          </span>
+          <h2 className="font-['Liberation_Sans'] text-2xl font-semibold uppercase tracking-[2.4px] text-white">
+            Project Pilihan
+          </h2>
+        </div>
 
-      {/* Header */}
-      <div style={{ padding: "64px 48px 48px 48px", display: "flex", alignItems: "flex-end", gap: "20px" }}>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em", color: "#555", textTransform: "uppercase", paddingBottom: "4px" }}
-        >
-          Section // 02
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, letterSpacing: "-0.02em", color: "#e8e8e8", textTransform: "uppercase" }}
-        >
-          Project Pilihan
-        </motion.h2>
-      </div>
-
-      {/* List */}
-      <div style={{ borderTop: "1px solid #1a1a1a" }}>
-        {projects.map((p, i) => (
-          <motion.div
-            key={p.num}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.08 }}
-            onMouseEnter={() => setHovered(p.num)}
-            onMouseLeave={() => setHovered(null)}
-            style={{
-              display: "grid", gridTemplateColumns: "56px 1fr auto auto",
-              gap: "0 32px", alignItems: "center",
-              padding: "28px 48px", borderBottom: "1px solid #1a1a1a",
-              background: hovered === p.num ? "#111" : "transparent",
-              transition: "background 0.25s", cursor: "default"
-            }}
-          >
-            {/* Nomor */}
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#444" }}>{p.num}</span>
-
-            {/* Judul + desc */}
-            <div>
-              <p style={{ fontSize: "17px", fontWeight: 600, color: "#e8e8e8", marginBottom: hovered === p.num ? "8px" : "0", transition: "margin 0.25s" }}>
-                {p.title}
-              </p>
-              <div style={{ overflow: "hidden", maxHeight: hovered === p.num ? "80px" : "0", opacity: hovered === p.num ? 1 : 0, transition: "all 0.3s" }}>
-                <p style={{ fontSize: "12px", color: "#555", lineHeight: 1.6, maxWidth: "480px", paddingTop: "4px" }}>{p.desc}</p>
+        <div className="grid gap-4 lg:grid-cols-3">
+          {projects.map((project, index) => (
+            <motion.article
+              key={project.num}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="flex h-full flex-col justify-between rounded-[22px] border border-zinc-900 bg-[#101010] p-6"
+            >
+              <div>
+                <div className="font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.25em] text-stone-400">
+                  {project.num}
+                </div>
+                <h3 className="mt-4 font-['Liberation_Sans'] text-xl font-semibold uppercase leading-7 text-white">
+                  {project.title}
+                </h3>
+                <p className="mt-2 font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.18em] text-stone-400">
+                  {project.tag}
+                </p>
               </div>
-            </div>
 
-            {/* Tech */}
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.1em", textAlign: "right", whiteSpace: "nowrap" }}>
-              {p.tech}
-            </span>
-
-            {/* Arrow */}
-            <span style={{
-              fontFamily: "var(--font-mono)", fontSize: "16px",
-              color: hovered === p.num ? "#e8e8e8" : "#2a2a2a",
-              transition: "color 0.2s, transform 0.2s",
-              transform: hovered === p.num ? "translate(2px, -2px)" : "translate(0,0)",
-              display: "inline-block"
-            }}>
-              →
-            </span>
-          </motion.div>
-        ))}
+              <div className="mt-6 flex flex-wrap gap-2">
+                {project.tech.map((item) => (
+                  <span key={item} className="rounded-full border border-zinc-800 px-2.5 py-1 font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.18em] text-stone-300">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </motion.article>
+          ))}
+        </div>
       </div>
-
     </section>
   );
 }

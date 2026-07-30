@@ -7,22 +7,25 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main style={{ background: "#0c0c0c", minHeight: "100vh", position: "relative" }}>
-      {/* Vertical side label */}
-      <div style={{
-        position: "fixed", left: "16px", top: "50%", transform: "translateY(-50%) rotate(180deg)",
-        writingMode: "vertical-rl", zIndex: 40, pointerEvents: "none", userSelect: "none",
-        fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em",
-        color: "#2a2a2a", textTransform: "uppercase"
-      }}>
-        MALIK
+    <main className="relative min-h-screen overflow-x-hidden bg-[#070707] text-stone-100">
+      <div className="pointer-events-none fixed left-3 top-1/2 z-40 hidden -translate-y-1/2 rotate-180 text-[9px] uppercase tracking-[0.35em] text-zinc-700 sm:block [writing-mode:vertical-rl]">
+        MALIK • ENGINEER
       </div>
-      <Navbar />
-      <Hero />
-      <Projects />
-      <About />
-      <Contact />
-      <Footer />
+
+      <div className="mx-auto flex max-w-7xl flex-col">
+        <Navbar />
+
+        <div className="px-3 pt-24 sm:px-6 lg:px-8">
+          <div className="overflow-hidden rounded-[28px] border border-zinc-900 bg-[#0c0c0c] shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+            <Hero />
+            <Projects />
+            <About />
+            <Contact />
+          </div>
+        </div>
+
+        <Footer />
+      </div>
     </main>
   );
 }

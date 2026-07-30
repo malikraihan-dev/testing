@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const links = [
   { label: "Work", href: "#projects" },
@@ -13,55 +13,77 @@ export default function Navbar() {
 
   useEffect(() => {
     const ids = ["projects", "about", "contact"];
-    const labels: Record<string, string> = { projects: "Work", about: "About", contact: "Contact" };
+    const labels: Record<string, string> = {
+      projects: "Work",
+      about: "About",
+      contact: "Contact",
+    };
+
     const obs = new IntersectionObserver(
-      (entries) => { entries.forEach((e) => { if (e.isIntersecting) setActive(labels[e.target.id]); }); },
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(labels[entry.target.id]);
+        });
+      },
       { threshold: 0.4 }
     );
-    ids.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) obs.observe(el);
+    });
+
     return () => obs.disconnect();
   }, []);
 
   return (
-    <nav style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "18px 32px", background: "rgba(12,12,12,0.92)",
-      backdropFilter: "blur(8px)", borderBottom: "1px solid #1a1a1a"
-    }}>
-      {/* Hamburger (kiri) */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        style={{ background: "none", border: "none", cursor: "pointer", padding: "4px", display: "flex", flexDirection: "column", gap: "4px" }}
-      >
-        <span style={{ display: "block", width: "18px", height: "1px", background: "#e8e8e8" }} />
-        <span style={{ display: "block", width: "18px", height: "1px", background: "#e8e8e8" }} />
-      </button>
+    <nav className="sticky top-0 z-50 border-b border-zinc-900/80 bg-[#070707]/90 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <button
+          onClick={() => setMenuOpen((prev) => !prev)}
+          className="flex flex-col gap-1.5 rounded-full border border-zinc-800 p-2 text-zinc-100 transition hover:border-[#4de082]"
+          aria-label="Toggle menu"
+        >
+          <span className="block h-px w-4 bg-current" />
+          <span className="block h-px w-4 bg-current" />
+          <span className="block h-px w-4 bg-current" />
+        </button>
 
-      {/* Logo tengah */}
-      <a href="#" style={{
-        fontFamily: "var(--font-mono)", fontSize: "13px", letterSpacing: "0.25em",
-        color: "#e8e8e8", textDecoration: "none", textTransform: "uppercase",
-        position: "absolute", left: "50%", transform: "translateX(-50%)"
-      }}>
-        MALIK
-      </a>
+        <a href="#" className="font-['JetBrains_Mono'] text-[11px] uppercase tracking-[0.35em] text-white">
+          MALIK
+        </a>
 
-      {/* Nav links kanan */}
-      <div style={{ display: "flex", gap: "28px" }}>
-        {links.map((l) => (
-          <a key={l.label} href={l.href} style={{
-            fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.1em",
-            textDecoration: "none", textTransform: "capitalize",
-            color: active === l.label ? "#e8e8e8" : "#555",
-            transition: "color 0.2s",
-            borderBottom: active === l.label ? "1px solid #e8e8e8" : "1px solid transparent",
-            paddingBottom: "1px"
-          }}>
-            {l.label}
-          </a>
-        ))}
+        <div className="hidden items-center gap-6 md:flex">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className={`font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.25em] transition ${
+                active === link.label ? "text-white" : "text-zinc-500 hover:text-white"
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </div>
+
+      {menuOpen && (
+        <div className="border-t border-zinc-900 bg-[#0a0a0a] px-4 py-4 sm:px-6 lg:px-8 md:hidden">
+          <div className="flex flex-col gap-3">
+            {links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.25em] text-zinc-300"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

@@ -1,27 +1,30 @@
-"use client";
+﻿"use client";
+
+const socials = ["GitHub", "LinkedIn", "Twitter"];
 
 export default function Footer() {
   return (
-    <footer style={{
-      borderTop: "1px solid #1a1a1a", padding: "20px 48px",
-      display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px"
-    }}>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-        © 2025 Malik. All Rights Reserved.
-      </span>
-      <div style={{ display: "flex", gap: "24px" }}>
-        {["LinkedIn", "Archive", "RSS"].map((l) => (
-          <a key={l} href="#" style={{
-            fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444",
-            textDecoration: "none", letterSpacing: "0.1em", textTransform: "uppercase",
-            transition: "color 0.2s"
-          }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "#e8e8e8"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "#444"; }}
-          >
-            {l}
-          </a>
-        ))}
+    <footer className="border-t border-zinc-900 bg-[#060606]">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+        <div className="font-['Liberation_Sans'] text-lg leading-7 text-white">
+          MALIK.DEV
+        </div>
+
+        <div className="font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.25em] text-stone-400">
+          © 2024 MALIK — ENGINEERED WITH PRECISION
+        </div>
+
+        <div className="flex flex-wrap gap-4 sm:gap-6">
+          {socials.map((item) => (
+            <a
+              key={item}
+              href="#"
+              className="font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.25em] text-stone-400 transition hover:text-white"
+            >
+              {item}
+            </a>
+          ))}
+        </div>
       </div>
     </footer>
   );

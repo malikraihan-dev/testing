@@ -9,105 +9,76 @@ const contacts = [
 
 export default function Contact() {
   return (
-    <section id="contact" style={{ borderTop: "1px solid #1a1a1a" }}>
-
-      {/* Header */}
-      <div style={{ padding: "64px 48px 48px 48px" }}>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em", color: "#555", textTransform: "uppercase", marginBottom: "12px" }}
-        >
-          04 / Contact
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          style={{ fontSize: "clamp(28px, 4vw, 42px)", fontWeight: 700, color: "#e8e8e8", letterSpacing: "-0.01em" }}
-        >
-          Mari Berkolaborasi
-        </motion.h2>
-      </div>
-
-      {/* Contact links */}
-      <div style={{ borderTop: "1px solid #1a1a1a" }}>
-        {contacts.map((c, i) => (
-          <motion.a
-            key={c.num}
-            href={c.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 8 }}
+    <section id="contact" className="bg-[#0c0c0c] px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+      <div className="mx-auto flex max-w-6xl flex-col gap-10">
+        <div className="flex flex-col gap-3">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.25em] text-stone-300"
+          >
+            04 / Contact
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            style={{
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-              padding: "22px 48px", borderBottom: "1px solid #1a1a1a",
-              textDecoration: "none", transition: "background 0.2s"
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#111"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
+            transition={{ duration: 0.5 }}
+            className="font-['Liberation_Sans'] text-2xl font-semibold uppercase tracking-[2.4px] text-white"
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#444" }}>{c.num}</span>
-              <span style={{ fontSize: "18px", fontWeight: 600, color: "#e8e8e8" }}>{c.label}</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "#555" }}>{c.value}</span>
-              <span style={{ color: "#555", fontSize: "14px" }}>↗</span>
-            </div>
-          </motion.a>
-        ))}
-      </div>
+            Mari Berkolaborasi
+          </motion.h2>
+        </div>
 
-      {/* Info bawah */}
-      <div style={{ display: "flex", gap: "64px", padding: "40px 48px", flexWrap: "wrap" }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+        <div className="flex w-full flex-col gap-0 rounded-[24px] border border-zinc-900 bg-[#101010] p-2 sm:p-4">
+          {contacts.map((contact, index) => (
+            <motion.a
+              key={contact.num}
+              href={contact.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+              className="flex flex-col gap-3 rounded-[16px] border-b border-zinc-900 px-3 py-5 transition hover:bg-[#141414] sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="flex items-center gap-4">
+                <span className="font-['JetBrains_Mono'] text-[10px] text-[#4de082]">{contact.num}</span>
+                <span className="font-['Liberation_Sans'] text-lg font-semibold uppercase text-white">{contact.label}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-['JetBrains_Mono'] text-[11px] uppercase tracking-[0.12em] text-stone-300">{contact.value}</span>
+                <span className="text-sm text-[#4de082]">↗</span>
+              </div>
+            </motion.a>
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="max-w-[260px]">
+            <p className="mb-3 font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.2em] text-stone-400">Availability</p>
+            <p className="text-sm leading-7 text-stone-300">Terbuka untuk project kolaborasi, internship, dan freelance work di bidang ML dan engineering.</p>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="max-w-[260px]">
+            <p className="mb-3 font-['JetBrains_Mono'] text-[10px] uppercase tracking-[0.2em] text-stone-400">Location</p>
+            <p className="text-sm leading-7 text-stone-300">Bogor, Indonesia<br />Remote Worldwide</p>
+          </motion.div>
+        </div>
+
+        <motion.a
+          href="mailto:malik@email.com"
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ delay: 0.15 }}
+          className="w-fit border border-[#4de082] px-5 py-3 font-['JetBrains_Mono'] text-[11px] uppercase tracking-[0.2em] text-[#4de082] transition hover:bg-[#4de082] hover:text-[#0c0c0c]"
         >
-          <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", color: "#555", textTransform: "uppercase", marginBottom: "10px" }}>
-            Availability
-          </p>
-          <p style={{ fontSize: "12px", color: "#888", lineHeight: 1.7, maxWidth: "220px" }}>
-            Terbuka untuk project kolaborasi, internship, dan freelance work di bidang ML dan engineering.
-          </p>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-        >
-          <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", color: "#555", textTransform: "uppercase", marginBottom: "10px" }}>
-            Location
-          </p>
-          <p style={{ fontSize: "12px", color: "#888", lineHeight: 1.7 }}>
-            Bogor, Indonesia<br />— Remote Worldwide
-          </p>
-        </motion.div>
+          Start a Conversation
+        </motion.a>
       </div>
-
-      {/* Image grid dekoratif */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", margin: "0 48px 64px 48px", borderTop: "1px solid #1a1a1a", paddingTop: "1px" }}>
-        {[1, 2].map((n) => (
-          <div key={n} style={{
-            height: "180px", background: "#111",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            border: "1px solid #1a1a1a"
-          }}>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#2a2a2a", letterSpacing: "0.2em" }}>
-              IMAGE.{n.toString().padStart(2, "0")}
-            </span>
-          </div>
-        ))}
-      </div>
-
     </section>
   );
 }
