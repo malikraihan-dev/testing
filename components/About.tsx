@@ -80,6 +80,18 @@ export default function About() {
             diri untuk membangun solusi yang tidak hanya bekerja — tetapi bekerja dengan baik.
           </motion.p>
 
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            style={{ fontSize: "13px", color: "#888", lineHeight: 1.8, marginBottom: "16px", maxWidth: "520px" }}
+          >
+            Selain di bangku kuliah, saya juga membawa pengalaman ini ke dunia kerja —
+            mengembangkan sistem backend berbasis Java &amp; Spring Boot selama masa kerja
+            di industri asuransi, sekaligus memperdalam machine learning lewat bootcamp AI Engineer.
+          </motion.p>
+
           {/* Kompetensi */}
           <div style={{ marginTop: "40px", borderTop: "1px solid #1a1a1a", paddingTop: "24px" }}>
             <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", color: "#444", textTransform: "uppercase", marginBottom: "16px" }}>
@@ -108,7 +120,7 @@ export default function About() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        style={{ margin: "48px 48px 64px 48px", borderTop: "1px solid #1a1a1a", paddingTop: "32px", paddingLeft: "24px", borderLeft: "2px solid #2a2a2a" }}
+        style={{ margin: "48px 48px 64px 48px", borderTop: "1px solid #1a1a1a", paddingTop: "32px", paddingLeft: "24px", borderLeft: "2px solid #4ade80" }}
       >
         <p style={{ fontSize: "13px", color: "#555", fontStyle: "italic", lineHeight: 1.8, maxWidth: "480px", marginBottom: "12px" }}>
           "Teknologi terbaik adalah yang tidak terlihat — ia hanya bekerja, dengan presisi yang konsisten, setiap saat."

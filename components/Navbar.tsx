@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 const links = [
   { label: "Work", href: "#projects" },
   { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -12,8 +13,8 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const ids = ["projects", "about", "contact"];
-    const labels: Record<string, string> = { projects: "Work", about: "About", contact: "Contact" };
+    const ids = ["projects", "about", "experience", "contact"];
+    const labels: Record<string, string> = { projects: "Work", about: "About", experience: "Experience", contact: "Contact" };
     const obs = new IntersectionObserver(
       (entries) => { entries.forEach((e) => { if (e.isIntersecting) setActive(labels[e.target.id]); }); },
       { threshold: 0.4 }
@@ -53,9 +54,9 @@ export default function Navbar() {
           <a key={l.label} href={l.href} style={{
             fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.1em",
             textDecoration: "none", textTransform: "capitalize",
-            color: active === l.label ? "#e8e8e8" : "#555",
+            color: active === l.label ? "#4ade80" : "#555",
             transition: "color 0.2s",
-            borderBottom: active === l.label ? "1px solid #e8e8e8" : "1px solid transparent",
+            borderBottom: active === l.label ? "1px solid #4ade80" : "1px solid transparent",
             paddingBottom: "1px"
           }}>
             {l.label}

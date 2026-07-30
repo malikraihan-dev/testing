@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -17,10 +17,22 @@ export default function Hero() {
   }, []);
 
   return (
-    <section style={{ minHeight: "100vh", paddingTop: "60px", display: "flex", flexDirection: "column" }}>
+    <section style={{ minHeight: "100vh", paddingTop: "60px", display: "flex", flexDirection: "column", position: "relative", overflow: "hidden" }}>
+
+      {/* Efek Gradien Tertiary Green (Aman untuk Layout) */}
+      <div style={{
+        position: "absolute",
+        top: "-10%",
+        left: "-10%",
+        width: "60vw",
+        height: "60vw",
+        background: "radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(12, 12, 12, 0) 70%)",
+        zIndex: 0,
+        pointerEvents: "none"
+      }} />
 
       {/* Top section */}
-      <div style={{ display: "flex", flex: 1, position: "relative" }}>
+      <div style={{ display: "flex", flex: 1, position: "relative", zIndex: 1 }}>
 
         {/* Konten kiri */}
         <div style={{ flex: 1, padding: "48px 32px 32px 48px", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
@@ -43,10 +55,48 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            style={{ fontSize: "clamp(64px, 10vw, 96px)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: "#e8e8e8", marginBottom: "24px" }}
+            style={{ 
+              fontSize: "clamp(64px, 10vw, 96px)", 
+              fontWeight: 700, 
+              letterSpacing: "-0.03em", 
+              lineHeight: 1, 
+              marginBottom: "10px", 
+              display: "flex", 
+              alignItems: "baseline", 
+              gap: "4px",
+              background: "linear-gradient(90deg, #e8e8e8 0%, #10b981 120%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent"
+            }}
           >
             MALIK
+            <motion.span
+              animate={{ opacity: [1, 0.15, 1] }}
+              transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                display: "inline-block",
+                width: "0.5em",
+                height: "clamp(48px, 7.5vw, 72px)",
+                background: "#4ade80",
+                marginLeft: "4px",
+              }}
+            />
           </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            style={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "10px",
+              letterSpacing: "0.2em",
+              color: "#4ade80",
+              textTransform: "uppercase",
+              marginBottom: "24px",
+            }}
+          >
+            Mohamad Malik Raihan Olii
+          </motion.p>
 
           {/* Deskripsi */}
           <motion.p
@@ -118,7 +168,7 @@ export default function Hero() {
       </div>
 
       {/* Capabilities bar bawah */}
-      <div style={{ borderTop: "1px solid #1a1a1a" }}>
+      <div style={{ borderTop: "1px solid #1a1a1a", position: "relative", zIndex: 1 }}>
         <div style={{ padding: "16px 48px 8px 48px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em", color: "#555", textTransform: "uppercase" }}>
             Selected Capabilities
@@ -137,15 +187,16 @@ export default function Hero() {
               style={{
                 display: "flex", alignItems: "center", justifyContent: "space-between",
                 padding: "14px 48px", borderTop: "1px solid #1a1a1a",
+                borderLeft: count === i + 1 ? "2px solid #4ade80" : "2px solid transparent",
                 background: count === i + 1 ? "#111" : "transparent",
-                transition: "background 0.3s"
+                transition: "background 0.3s, border-color 0.3s"
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
                 <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#444" }}>{c.num}</span>
                 <span style={{ fontSize: "13px", color: "#e8e8e8", textTransform: "uppercase", letterSpacing: "0.05em" }}>{c.label}</span>
               </div>
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: "#444" }}>
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: "12px", color: count === i + 1 ? "#4ade80" : "#444" }}>
                 {count === i + 1 ? "↗" : ""}
               </span>
             </motion.div>
