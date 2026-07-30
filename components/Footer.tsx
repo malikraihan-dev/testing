@@ -3,10 +3,19 @@
 export default function Footer() {
   return (
     <footer style={{
-      borderTop: "1px solid #1a1a1a", padding: "20px 48px",
-      display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px"
+      borderTop: "1px solid #1a1a1a",
+      padding: "20px 48px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      flexWrap: "wrap",
+      gap: "12px",
+      marginBottom: 0,
     }}>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+      <span style={{
+        fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444",
+        letterSpacing: "0.15em", textTransform: "uppercase"
+      }}>
         © 2025 Malik. All Rights Reserved.
       </span>
       <div style={{ display: "flex", gap: "24px" }}>

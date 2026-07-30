@@ -1,19 +1,42 @@
 @import "tailwindcss";
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
 
 body {
   background: #0c0c0c;
   color: #e8e8e8;
   font-family: var(--font-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
-.font-mono { font-family: var(--font-mono), monospace; }
+main {
+  display: flex;
+  flex-direction: column;
+}
 
-::selection { background: #e8e8e8; color: #0c0c0c; }
+footer {
+  margin-top: auto;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+::selection {
+  background: #e8e8e8;
+  color: #0c0c0c;
+}
 
 ::-webkit-scrollbar { width: 1px; }
 ::-webkit-scrollbar-track { background: #0c0c0c; }
