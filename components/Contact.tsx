@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { MouseEvent } from "react";
 
 const contacts = [
   { num: "01", label: "Email", value: "malik@email.com", href: "mailto:malik@email.com" },
@@ -8,10 +9,16 @@ const contacts = [
 ];
 
 export default function Contact() {
+  const handleEnter = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.background = "#111";
+  };
+  const handleLeave = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.background = "transparent";
+  };
+
   return (
     <section id="contact" style={{ borderTop: "1px solid #1a1a1a" }}>
 
-      {/* Header */}
       <div style={{ padding: "64px 48px 48px 48px" }}>
         <motion.p
           initial={{ opacity: 0 }}
@@ -32,7 +39,6 @@ export default function Contact() {
         </motion.h2>
       </div>
 
-      {/* Contact links */}
       <div style={{ borderTop: "1px solid #1a1a1a" }}>
         {contacts.map((c, i) => (
           <motion.a
@@ -44,13 +50,13 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
+            onMouseEnter={handleEnter}
+            onMouseLeave={handleLeave}
             style={{
               display: "flex", alignItems: "center", justifyContent: "space-between",
               padding: "22px 48px", borderBottom: "1px solid #1a1a1a",
               textDecoration: "none", transition: "background 0.2s"
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#111"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "#444" }}>{c.num}</span>
@@ -64,13 +70,8 @@ export default function Contact() {
         ))}
       </div>
 
-      {/* Info bawah */}
       <div style={{ display: "flex", gap: "64px", padding: "40px 48px", flexWrap: "wrap" }}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", color: "#555", textTransform: "uppercase", marginBottom: "10px" }}>
             Availability
           </p>
@@ -78,12 +79,7 @@ export default function Contact() {
             Terbuka untuk project kolaborasi, internship, dan freelance work di bidang ML dan engineering.
           </p>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-        >
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.2em", color: "#555", textTransform: "uppercase", marginBottom: "10px" }}>
             Location
           </p>
@@ -93,14 +89,9 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      {/* Image grid dekoratif */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1px", margin: "0 48px 64px 48px", borderTop: "1px solid #1a1a1a", paddingTop: "1px" }}>
         {[1, 2].map((n) => (
-          <div key={n} style={{
-            height: "180px", background: "#111",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            border: "1px solid #1a1a1a"
-          }}>
+          <div key={n} style={{ height: "180px", background: "#111", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #1a1a1a" }}>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#2a2a2a", letterSpacing: "0.2em" }}>
               IMAGE.{n.toString().padStart(2, "0")}
             </span>
