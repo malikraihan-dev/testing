@@ -1,5 +1,6 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const skills = [
   { num: "01", label: "Machine Learning & Deep Learning" },
@@ -9,7 +10,73 @@ const skills = [
   { num: "05", label: "Project Management" },
 ];
 
+const stats = [
+  { label: "Project", target: 3 },
+  { label: "Tahun Pengalaman", target: 1 },
+  { label: "Organisasi Aktif", target: 1 },
+];
+
+function easeOutCubic(value: number) {
+  return 1 - Math.pow(1 - value, 3);
+}
+
 export default function About() {
+  const statsRef = useRef<HTMLDivElement | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const hasAnimatedRef = useRef(false);
+  const [displayValues, setDisplayValues] = useState(stats.map(() => 0));
+
+  useEffect(() => {
+    const element = statsRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    const runAnimation = () => {
+      if (hasAnimatedRef.current) {
+        return;
+      }
+
+      hasAnimatedRef.current = true;
+      const duration = 2000;
+      const startTime = performance.now();
+
+      const animate = (time: number) => {
+        const elapsed = Math.min((time - startTime) / duration, 1);
+        const eased = easeOutCubic(elapsed);
+
+        setDisplayValues(stats.map((stat) => Math.round(stat.target * eased)));
+
+        if (elapsed < 1) {
+          animationFrameRef.current = window.requestAnimationFrame(animate);
+        }
+      };
+
+      animationFrameRef.current = window.requestAnimationFrame(animate);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          runAnimation();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+
+      if (animationFrameRef.current !== null) {
+        window.cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section id="about" style={{ borderTop: "1px solid #1a1a1a" }}>
 
@@ -92,6 +159,45 @@ export default function About() {
             di industri asuransi, sekaligus memperdalam machine learning lewat bootcamp AI Engineer.
           </motion.p>
 
+          <div
+            ref={statsRef}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+              gap: "24px",
+              marginTop: "36px",
+              marginBottom: "34px",
+            }}
+          >
+            {stats.map((stat, index) => (
+              <div key={stat.label} style={{ minWidth: 0 }}>
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "clamp(34px, 5vw, 56px)",
+                    lineHeight: 1,
+                    letterSpacing: "-0.04em",
+                    color: "#ffffff",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {String(displayValues[index]).padStart(2, "0")}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "9px",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "#bdbdbd",
+                  }}
+                >
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
           {/* Kompetensi */}
           <div style={{ marginTop: "40px", borderTop: "1px solid #1a1a1a", paddingTop: "24px" }}>
             <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.25em", color: "#444", textTransform: "uppercase", marginBottom: "16px" }}>
@@ -123,7 +229,7 @@ export default function About() {
         style={{ margin: "48px 48px 64px 48px", borderTop: "1px solid #1a1a1a", paddingTop: "32px", paddingLeft: "24px", borderLeft: "2px solid #4ade80" }}
       >
         <p style={{ fontSize: "13px", color: "#555", fontStyle: "italic", lineHeight: 1.8, maxWidth: "480px", marginBottom: "12px" }}>
-          "Teknologi terbaik adalah yang tidak terlihat — ia hanya bekerja, dengan presisi yang konsisten, setiap saat."
+          &quot;Teknologi terbaik adalah yang tidak terlihat — ia hanya bekerja, dengan presisi yang konsisten, setiap saat.&quot;
         </p>
         <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.2em", textTransform: "uppercase" }}>
           — Malik, Statement of Intent
