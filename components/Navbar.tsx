@@ -1,18 +1,26 @@
 "use client";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const links = [
-  { label: "Work", href: "#projects" },
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "/#projects" },
+  { label: "About", href: "/#about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
   const [active, setActive] = useState("Work");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    if (pathname.startsWith("/blog")) {
+      setActive("Blog");
+      return;
+    }
+
     const ids = ["projects", "about", "experience", "contact"];
     const labels: Record<string, string> = { projects: "Work", about: "About", experience: "Experience", contact: "Contact" };
     const obs = new IntersectionObserver(
@@ -21,7 +29,7 @@ export default function Navbar() {
     );
     ids.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
     return () => obs.disconnect();
-  }, []);
+  }, [pathname]);
 
   return (
     <nav style={{
@@ -30,9 +38,8 @@ export default function Navbar() {
       padding: "18px 32px", background: "rgba(12,12,12,0.92)",
       backdropFilter: "blur(8px)", borderBottom: "1px solid #1a1a1a"
     }}>
-      {/* Hamburger (kiri) */}
+      {/* Hamburger kiri */}
       <button
-        onClick={() => setMenuOpen(!menuOpen)}
         style={{ background: "none", border: "none", cursor: "pointer", padding: "4px", display: "flex", flexDirection: "column", gap: "4px" }}
       >
         <span style={{ display: "block", width: "18px", height: "1px", background: "#e8e8e8" }} />
@@ -40,27 +47,27 @@ export default function Navbar() {
       </button>
 
       {/* Logo tengah */}
-      <a href="#" style={{
+      <Link href="/" style={{
         fontFamily: "var(--font-mono)", fontSize: "13px", letterSpacing: "0.25em",
         color: "#e8e8e8", textDecoration: "none", textTransform: "uppercase",
         position: "absolute", left: "50%", transform: "translateX(-50%)"
       }}>
         MALIK
-      </a>
+      </Link>
 
       {/* Nav links kanan */}
       <div style={{ display: "flex", gap: "28px" }}>
         {links.map((l) => (
-          <a key={l.label} href={l.href} style={{
+          <Link key={l.label} href={l.href} style={{
             fontFamily: "var(--font-mono)", fontSize: "11px", letterSpacing: "0.1em",
             textDecoration: "none", textTransform: "capitalize",
-            color: active === l.label ? "#4ade80" : "#555",
+            color: active === l.label ? "#e8e8e8" : "#555",
             transition: "color 0.2s",
-            borderBottom: active === l.label ? "1px solid #4ade80" : "1px solid transparent",
+            borderBottom: active === l.label ? "1px solid #e8e8e8" : "1px solid transparent",
             paddingBottom: "1px"
           }}>
             {l.label}
-          </a>
+          </Link>
         ))}
       </div>
     </nav>

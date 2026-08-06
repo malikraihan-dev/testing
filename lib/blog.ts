@@ -3,49 +3,47 @@ import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
 import html from "remark-html";
-import { BlogPostMeta } from "./types";
+import { BlogPostMeta, BlogPost } from "./types";
 
-// npm install gray-matter remark remark-html
+const postsDir = path.join(process.cwd(), "posts");
 
-const POSTS_DIR = path.join(process.cwd(), "content/blog");
+export function getAllPosts(): BlogPostMeta[] {
+  if (!fs.existsSync(postsDir)) return [];
 
-function readSlugs() {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-  return fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".md"));
+  const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
+
+  const posts = files.map((file) => {
+    const slug = file.replace(/\.md$/, "");
+    const raw = fs.readFileSync(path.join(postsDir, file), "utf-8");
+    const { data } = matter(raw);
+    return {
+      slug,
+      title: data.title || slug,
+      date: data.date || "",
+      description: data.description || "",
+      tags: data.tags || [],
+      readTime: data.readTime || "5 min",
+    } as BlogPostMeta;
+  });
+
+  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export function getAllPostsMeta(): BlogPostMeta[] {
-  return readSlugs()
-    .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, "");
-      const fullPath = path.join(POSTS_DIR, fileName);
-      const { data } = matter(fs.readFileSync(fullPath, "utf8"));
-      return {
-        slug,
-        title: data.title ?? slug,
-        excerpt: data.excerpt ?? "",
-        date: data.date ?? "",
-        readTime: data.readTime ?? "5 menit baca",
-      };
-    })
-    .sort((a, b) => (a.date < b.date ? 1 : -1));
-}
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+  const filePath = path.join(postsDir, slug + ".md");
+  if (!fs.existsSync(filePath)) return null;
 
-export async function getPostBySlug(slug: string) {
-  const fullPath = path.join(POSTS_DIR, `${slug}.md`);
-  if (!fs.existsSync(fullPath)) return null;
-
-  const { data, content } = matter(fs.readFileSync(fullPath, "utf8"));
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(raw);
   const processed = await remark().use(html).process(content);
 
   return {
-    meta: {
-      slug,
-      title: data.title ?? slug,
-      excerpt: data.excerpt ?? "",
-      date: data.date ?? "",
-      readTime: data.readTime ?? "5 menit baca",
-    } as BlogPostMeta,
-    contentHtml: processed.toString(),
+    slug,
+    title: data.title || slug,
+    date: data.date || "",
+    description: data.description || "",
+    tags: data.tags || [],
+    readTime: data.readTime || "5 min",
+    content: processed.toString(),
   };
 }

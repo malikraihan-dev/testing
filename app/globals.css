@@ -56,6 +56,22 @@ footer {
   color: #0c0c0c;
 }
 
+.blog-post-row {
+  background: transparent;
+  transition: background 0.2s;
+}
+.blog-post-row:hover {
+  background: #111;
+}
+
+.blog-back-link {
+  color: #444;
+  transition: color 0.2s;
+}
+.blog-back-link:hover {
+  color: #e8e8e8;
+}
+
 ::-webkit-scrollbar { width: 1px; }
 ::-webkit-scrollbar-track { background: #0c0c0c; }
 ::-webkit-scrollbar-thumb { background: #2a2a2a; }

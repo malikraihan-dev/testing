@@ -15,7 +15,7 @@ export default function Home() {
         position: "fixed", left: "16px", top: "50%", transform: "translateY(-50%) rotate(180deg)",
         writingMode: "vertical-rl", zIndex: 40, pointerEvents: "none", userSelect: "none",
         fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.25em",
-        color: "#2a2a2a", textTransform: "uppercase"
+        color: "#413e3e", textTransform: "uppercase"
       }}>
         MALIK
       </div>

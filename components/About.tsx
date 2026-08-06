@@ -97,15 +97,19 @@ export default function About() {
       {/* Body — dua kolom */}
       <div style={{ display: "flex", gap: "0", padding: "40px 48px 0 48px", flexWrap: "wrap" }}>
 
-        {/* Kiri — foto placeholder + info */}
+        {/* Kiri — foto + info */}
         <div style={{ width: "200px", flexShrink: 0, marginRight: "48px", marginBottom: "32px" }}>
-          {/* Foto placeholder */}
+          {/* Foto */}
           <div style={{
             width: "180px", height: "220px", background: "#161616",
             border: "1px solid #1a1a1a", marginBottom: "12px",
-            display: "flex", alignItems: "center", justifyContent: "center"
+            overflow: "hidden"
           }}>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#333", textTransform: "uppercase", letterSpacing: "0.2em" }}>Foto.jpg</span>
+            <img
+              src="/foto.jpg"
+              alt="Foto Malik"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
           </div>
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.1em" }}>
             Based in Bogor, Indonesia · 2025 · IPB Univ.

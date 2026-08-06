@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -9,6 +9,7 @@ const projects = [
     desc: "Analisis sentimen review aplikasi Indonesia menggunakan LSTM Bi-directional. Akurasi model 91% pada dataset Gojek & Shopee.",
     tech: "Python // TensorFlow // Streamlit",
     href: "",
+    image: "/projects/sentiment-analysis.png",
   },
   {
     num: "02",
@@ -16,6 +17,7 @@ const projects = [
     desc: "Workflow otomasi lead form berbasis webhook — integrasi Google Sheets, notifikasi Slack, dan SMS via Twilio. Self-hosted di Railway.",
     tech: "n8n // Railway // Twilio",
     href: "",
+    image: "/projects/n8n-lead-automation.png",
   },
   {
     num: "03",
@@ -23,6 +25,7 @@ const projects = [
     desc: "Sistem kontrol reaktor Hydrothermal Liquefaction menggunakan sensor NIR dan model AI untuk monitoring parameter secara real-time.",
     tech: "Python // Arduino // NIR Sensor",
     href: "",
+    image: "/projects/htl-reactor-ai-control.png",
   },
 ];
 
@@ -80,6 +83,28 @@ export default function Projects() {
               <p style={{ fontSize: "17px", fontWeight: 600, color: "#e8e8e8", marginBottom: hovered === p.num ? "8px" : "0", transition: "margin 0.25s" }}>
                 {p.title}
               </p>
+
+              {/* Gambar preview - muncul saat hover */}
+              <div style={{
+                overflow: "hidden",
+                maxHeight: hovered === p.num ? "160px" : "0",
+                opacity: hovered === p.num ? 1 : 0,
+                transition: "all 0.3s",
+              }}>
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  style={{
+                    width: "240px",
+                    height: "140px",
+                    objectFit: "cover",
+                    borderRadius: "4px",
+                    border: "1px solid #1a1a1a",
+                    display: "block",
+                  }}
+                />
+              </div>
+
               <div style={{ overflow: "hidden", maxHeight: hovered === p.num ? "80px" : "0", opacity: hovered === p.num ? 1 : 0, transition: "all 0.3s" }}>
                 <p style={{ fontSize: "12px", color: "#555", lineHeight: 1.6, maxWidth: "480px", paddingTop: "4px" }}>{p.desc}</p>
               </div>

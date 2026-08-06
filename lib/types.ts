@@ -1,3 +1,16 @@
+export interface BlogPostMeta {
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+  tags: string[];
+  readTime: string;
+}
+
+export interface BlogPost extends BlogPostMeta {
+  content: string;
+}
+
 export interface ProjectCaseStudy {
   slug: string;
   title: string;
@@ -7,23 +20,15 @@ export interface ProjectCaseStudy {
   approach: string;
   architecture: string[];
   result: string[];
-  images?: string[];
   demoUrl?: string;
   repoUrl?: string;
+  images?: string[];
 }
 
 export interface Certification {
   title: string;
   issuer: string;
   year: string;
-  credentialUrl?: string;
   skills: string[];
-}
-
-export interface BlogPostMeta {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
+  credentialUrl?: string;
 }
