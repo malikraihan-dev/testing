@@ -27,6 +27,14 @@ const projects = [
     href: "",
     image: "/projects/htl-reactor-ai-control.png",
   },
+  {
+    num: "04",
+    title: "ABKO",
+    desc: "Sistem IOT monitoring dan kontrol terhadap kesehatan buah yang terdapat penimbangan serta suhu penyimpanannya.",
+    tech: "Python // Arduino // loadcell Sensor // DHT12 Sensor",
+    href: "",
+    image: "/projects/abko.png",
+  },
 ];
 
 export default function Projects() {
