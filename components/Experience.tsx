@@ -7,7 +7,7 @@ const experience = [
     type: "Pekerjaan",
     role: "Web Developer",
     org: "Asuransi Bangun Askrida",
-    period: "6 Bulan",
+    period: "4 Bulan",
     desc: "Mengembangkan dan memelihara sistem backend untuk kebutuhan internal perusahaan asuransi, menggunakan Java dan framework Spring Boot.",
     tech: ["Java", "Spring Boot"],
   },
@@ -19,6 +19,15 @@ const experience = [
     period: "Program Bootcamp",
     desc: "Mengikuti program bootcamp terstruktur yang berfokus pada machine learning dan pengembangan sistem berbasis AI.",
     tech: ["Python", "Machine Learning"],
+  },
+   {
+    num: "03",
+    type: "Bootcamp",
+    role: "AI Engineer",
+    org: "MySkill",
+    period: "Program Bootcamp AI & automation",
+    desc: "Mengikuti program bootcamp terstruktur yang berfokus pada machine learning dan pengembangan sistem berbasis AI.",
+    tech: ["Python", "AI", "Machine Learning"],
   },
 ];
 
