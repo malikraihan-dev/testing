@@ -11,9 +11,9 @@ const skills = [
 ];
 
 const stats = [
-  { label: "Project", target: 3 },
-  { label: "Tahun Pengalaman", target: 1 },
-  { label: "Organisasi Aktif", target: 1 },
+  { label: "Project", target: 4 },
+  { label: "Tahun Pengalaman", target: 2 },
+  { label: "Organisasi Aktif", target: 2 },
 ];
 
 function easeOutCubic(value: number) {
