@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import { MouseEvent } from "react";
 
 const contacts = [
-  { num: "01", label: "Email", value: "malik@email.com", href: "mailto:malik@email.com" },
-  { num: "02", label: "GitHub", value: "@malik_dev", href: "https://github.com/malik" },
-  { num: "03", label: "LinkedIn", value: "malik-engineering", href: "https://linkedin.com/in/malik" },
+  { num: "01", label: "Email", value: "malik@email.com", href: "mailto:malik.33@email.com" },
+  { num: "02", label: "GitHub", value: "@malikraihan-dev", href: "https://github.com/malikraihan-dev" },
+  { num: "03", label: "LinkedIn", value: "malik-engineering", href: "https://www.linkedin.com/in/malikraihan" }
 ];
 
 // Ganti dengan nomor WhatsApp kamu (format: 628xxxxxxxxxx)
-const WHATSAPP_NUMBER = "628xxxxxxxxxx";
+const WHATSAPP_NUMBER = "6285174251302";
 const WHATSAPP_MESSAGE = "Halo Malik, saya tertarik untuk berkolaborasi dengan kamu!";
 const WHATSAPP_URL = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(WHATSAPP_MESSAGE);
 
