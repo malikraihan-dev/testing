@@ -112,7 +112,7 @@ export default function About() {
             />
           </div>
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "#444", letterSpacing: "0.1em" }}>
-            Based in Bogor, Indonesia · 2025 · IPB Univ.
+            Based in Bogor, Indonesia · 2023 · IPB University
           </p>
         </div>
 
