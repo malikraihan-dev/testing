@@ -17,4 +17,11 @@ export const certifications: Certification[] = [
     skills: ["Machine Learning", "Python"],
     credentialUrl: "",
   },
+  {
+    title: "AI N8N: Workflow Automation & Integration",
+    issuer: "MySkill — Bootcamp",
+    year: "2026",
+    skills: ["Workflow Automation", "Integration", "Python"],
+    credentialUrl: "",
+  },
 ];
